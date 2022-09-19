@@ -1,7 +1,6 @@
-package br.com.gonzaga.bankproject.models;
+package br.com.gonzaga.mybankproject.models;
 
 import lombok.*;
-import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Entity;
 import org.springframework.data.annotation.Id;
 

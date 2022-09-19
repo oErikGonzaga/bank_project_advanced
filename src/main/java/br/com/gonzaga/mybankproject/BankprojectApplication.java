@@ -1,4 +1,4 @@
-package br.com.gonzaga.bankproject;
+package br.com.gonzaga.mybankproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
