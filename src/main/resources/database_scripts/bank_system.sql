@@ -11,7 +11,7 @@ state			VARCHAR	(2)		NOT NULL					,
 address 		VARCHAR (30)	NOT NULL					,
 house_number	VARCHAR	(5)		NOT NULL					,
 cep				VARCHAR	(8)	    NOT NULL					,
-address_2		VARCHAR	(30)								,
+second_address	VARCHAR	(30)								,
 PRIMARY KEY	(id)
 );
 
