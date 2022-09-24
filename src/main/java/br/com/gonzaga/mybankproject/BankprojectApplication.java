@@ -2,6 +2,7 @@ package br.com.gonzaga.mybankproject;
 
 import br.com.gonzaga.mybankproject.models.Address;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
+import br.com.gonzaga.mybankproject.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +13,6 @@ public class BankprojectApplication implements CommandLineRunner {
 
 	@Autowired
 	private AddressRepository repository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BankprojectApplication.class, args);
 	}
