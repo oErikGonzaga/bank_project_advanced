@@ -2,7 +2,6 @@ package br.com.gonzaga.mybankproject;
 
 import br.com.gonzaga.mybankproject.models.Address;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
-import br.com.gonzaga.mybankproject.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,19 +19,19 @@ public class BankprojectApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Address address = Address
-				.builder()
-				.cep("02542110")
-				.city("Sao Paulo")
-				.state("SP")
-				.number("641")
-				.address("Rua Abura")
-				.secondAddress("A")
-				.build();
-
-		Address addressSaved = repository.save(address);
-
-		System.out.println(addressSaved);
+//		Address address = Address
+//				.builder()
+//				.cep("02542110")
+//				.city("Sao Paulo")
+//				.state("SP")
+//				.number("641")
+//				.address("Rua Abura")
+//				.secondAddress("A")
+//				.build();
+//
+//		Address addressSaved = repository.save(address);
+//
+//		System.out.println(addressSaved);
 
 	}
 }
