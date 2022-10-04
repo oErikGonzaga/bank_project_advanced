@@ -1,6 +1,5 @@
 package br.com.gonzaga.mybankproject;
 
-import br.com.gonzaga.mybankproject.models.Address;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -8,12 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BankprojectApplication implements CommandLineRunner {
+public class BankProjectApplication implements CommandLineRunner {
 
 	@Autowired
 	private AddressRepository repository;
 	public static void main(String[] args) {
-		SpringApplication.run(BankprojectApplication.class, args);
+		SpringApplication.run(BankProjectApplication.class, args);
 	}
 
 	@Override
