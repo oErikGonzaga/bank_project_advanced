@@ -28,7 +28,9 @@ public class Address implements Serializable {
 
     @Column(name = "house_number")
     private String number;
+
     private String address;
+
     @Column(name = "second_address")
     private String secondAddress;
 
