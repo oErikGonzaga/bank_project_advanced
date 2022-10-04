@@ -1,31 +1,33 @@
 DROP DATABASE IF EXISTS bank_project_db;
 
-CREATE DATABASE DB_BANK_SYSTEM;
+CREATE DATABASE bank_project_db;
 
-USE DB_BANK_SYSTEM;
+USE bank_project_db;
+
+SELECT * FROM address;
 
 CREATE TABLE address (
-id				INT				NOT NULL	AUTO_INCREMENT	,
-city			VARCHAR (30)	NOT NULL					,
-state			VARCHAR	(2)		NOT NULL					,
-address 		VARCHAR (30)	NOT NULL					,
-house_number	VARCHAR	(5)		NOT NULL					,
-cep				VARCHAR	(8)	    NOT NULL					,
-second_address	VARCHAR	(30)								,
+id				INT			    	NOT NULL	AUTO_INCREMENT	    ,
+city			VARCHAR (30)	    NOT NULL					    ,
+state			VARCHAR	(2)	    	NOT NULL					    ,
+address 		VARCHAR (30)	    NOT NULL					    ,
+house_number	VARCHAR	(5)		    NOT NULL					    ,
+cep				VARCHAR	(8)	        NOT NULL					    ,
+second_address	VARCHAR	(30)			    					    ,
 PRIMARY KEY	(id)
 );
 
 CREATE TABLE client (
-id				INT					NOT NULL	AUTO_INCREMENT	,
-name			VARCHAR	(150)		NOT NULL					,
-birthdate		DATE				NOT NULL					,
-phone			BIGINT	(15)		NOT NULL					,
-email			VARCHAR (50)		NOT NULL	UNIQUE			,
-person_tp		VARCHAR (2)						DEFAULT 'PF'	,
-document_tp		VARCHAR (10)					DEFAULT	'CPF'	,
-document		VARCHAR	(20)		NOT NULL					,
-address_id		INT 				NOT NULL					,
-PRIMARY KEY	(id)												,
+id				INT					NOT NULL	AUTO_INCREMENT	    ,
+name			VARCHAR	(150)		NOT NULL					    ,
+birthdate		DATE				NOT NULL					    ,
+phone			BIGINT	(15)		NOT NULL				    	,
+email			VARCHAR (50)		NOT NULL	UNIQUE		    	,
+person_tp		VARCHAR (2)						DEFAULT 'PF'	    ,
+document_tp		VARCHAR (10)					DEFAULT	'CPF'   	,
+document		VARCHAR	(20)		NOT NULL				    	,
+address_id		INT 				NOT NULL				    	,
+PRIMARY KEY	(id)											    	,
 FOREIGN KEY (address_id) REFERENCES address (id)
 );
 
@@ -55,11 +57,11 @@ FOREIGN KEY (account_id) REFERENCES bank_account (id)
 );
 
 CREATE TABLE access (
-client_id			INT 			NOT NULL 			,
-account_id			INT				NOT NULL			,
-password			VARCHAR (10)	NOT NULL			,
-PRIMARY KEY	(client_id, account_id)						,
-FOREIGN KEY (client_id) REFERENCES client (id)			,
+client_id			INT 			NOT NULL 			            ,
+account_id			INT				NOT NULL			            ,
+password			VARCHAR (10)	NOT NULL			            ,
+PRIMARY KEY	(client_id, account_id)						            ,
+FOREIGN KEY (client_id) REFERENCES client (id)			            ,
 FOREIGN KEY (account_id) REFERENCES bank_account (id)
 );
 
