@@ -30,7 +30,7 @@ public class Client implements Serializable {
 
     private String email;
 
-    private Integer phone;
+    private Long phone;
 
     private String document;
 
