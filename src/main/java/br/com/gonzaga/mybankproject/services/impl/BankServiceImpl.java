@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import request.AccountRequest;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static br.com.gonzaga.mybankproject.Utils.DateUtil.stringToLocalDate;
 import static br.com.gonzaga.mybankproject.Utils.NumberUtil.generateRandomNumber;
@@ -56,7 +57,7 @@ public class BankServiceImpl implements BankService {
 
         Account account = Account
                 .builder()
-                .number(generateRandomNumber())
+                .number(generateAccountNumber())
                 .client(savedClient)
                 .registration(LocalDateTime.now())
                 .password(Long.parseLong(request.getPassword()))
@@ -67,5 +68,15 @@ public class BankServiceImpl implements BankService {
         log.info("BankServiceimpl.createAccount end - account={}", savedAccount);
 
         return account;
+    }
+
+    private Long generateAccountNumber() {
+        Long number = generateRandomNumber();
+
+        while (accountRepository.findFirstByNumber(number).isPresent()) {
+            number = generateRandomNumber();
+        }
+
+        return number;
     }
 }

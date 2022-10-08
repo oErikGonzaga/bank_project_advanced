@@ -42,6 +42,4 @@ public class Account implements Serializable {
     @Column(name = "deactivation_dt")
     private LocalDateTime deactivation;
 
-
-
 }

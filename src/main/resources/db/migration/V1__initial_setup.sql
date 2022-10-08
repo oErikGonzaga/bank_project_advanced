@@ -1,11 +1,11 @@
 CREATE TABLE        address (
-id				    INT				    NOT NULL	AUTO_INCREMENT	    ,
-city			    VARCHAR (30)	    NOT NULL					    ,
-state			    VARCHAR	(2)		    NOT NULL					    ,
-address 		    VARCHAR (30)	    NOT NULL					    ,
-house_number	    VARCHAR	(5)		    NOT NULL					    ,
-cep				    VARCHAR	(8)	        NOT NULL					    ,
-second_address	    VARCHAR	(30)							    	    ,
+id				    INT				    NOT NULL	AUTO_INCREMENT  ,
+city			    VARCHAR (30)	    NOT NULL				    ,
+state			    VARCHAR	(2)		    NOT NULL				    ,
+address 		    VARCHAR (30)	    NOT NULL				    ,
+house_number	    VARCHAR	(5)		    NOT NULL				    ,
+cep				    VARCHAR	(8)	        NOT NULL				    ,
+second_address	    VARCHAR	(30)						    	    ,
 PRIMARY KEY	(id)
 );
 
