@@ -2,9 +2,11 @@ DROP DATABASE IF EXISTS bank_project_db;
 
 CREATE DATABASE bank_project_db;
 
-USE bank_project_db;
+DESC bank_project_db;
 
-SELECT * FROM address;
+SELECT * FROM bank_project_db.account;
+
+SHOW TABLES;
 
 CREATE TABLE address (
 id				INT			    	NOT NULL	AUTO_INCREMENT	    ,
