@@ -1,11 +1,13 @@
 package br.com.gonzaga.mybankproject.services.impl;
 
+import br.com.gonzaga.mybankproject.client.ViaCepClient;
 import br.com.gonzaga.mybankproject.models.Account;
 import br.com.gonzaga.mybankproject.models.Address;
 import br.com.gonzaga.mybankproject.models.Client;
 import br.com.gonzaga.mybankproject.repository.AccountRepository;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
 import br.com.gonzaga.mybankproject.repository.ClientRepository;
+import br.com.gonzaga.mybankproject.response.AddressResponse;
 import br.com.gonzaga.mybankproject.services.BankService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Service;
 import request.AccountRequest;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 import static br.com.gonzaga.mybankproject.Utils.DateUtil.stringToLocalDate;
 import static br.com.gonzaga.mybankproject.Utils.NumberUtil.generateRandomNumber;
@@ -23,6 +24,7 @@ import static br.com.gonzaga.mybankproject.Utils.NumberUtil.generateRandomNumber
 @RequiredArgsConstructor
 public class BankServiceImpl implements BankService {
 
+    private final ViaCepClient viaCepClient;
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
     private final AccountRepository accountRepository;
@@ -31,13 +33,15 @@ public class BankServiceImpl implements BankService {
     public Account createAccount(AccountRequest request) {
         log.info("BankServiceimpl.createAccount init - account={}", request);
 
+        AddressResponse addressResponse = viaCepClient.getAddressByCep(request.getCep());
+
         Address address = Address
                 .builder()
-                .city("São Paulo")
-                .state("SP")
-                .address("Rua Teste")
                 .cep(request.getCep())
                 .number(request.getNumber())
+                .state(addressResponse.getUf())
+                .city(addressResponse.getLocalidade())
+                .address(addressResponse.getLogradouro())
                 .secondAddress(request.getSecondAddress())
                 .build();
 

@@ -4,9 +4,9 @@ CREATE DATABASE bank_project_db;
 
 DESC bank_project_db;
 
-SELECT * FROM bank_project_db.account;
+SELECT * FROM bank_project_db.client;
 
-SHOW TABLES;
+SHOW bank_project_db.client;
 
 CREATE TABLE address (
 id				INT			    	NOT NULL	AUTO_INCREMENT	    ,
