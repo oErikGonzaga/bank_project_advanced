@@ -1,14 +1,18 @@
 package br.com.gonzaga.mybankproject.api;
 
+import br.com.gonzaga.mybankproject.models.Account;
 import br.com.gonzaga.mybankproject.services.BankService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import request.AccountRequest;
 
+import java.util.List;
+import java.util.Objects;
+
+@Slf4j
 @RestController
 public class BankController {
 
@@ -20,11 +24,17 @@ public class BankController {
     @PostMapping("api/create-account")
 
     // @RequestyBody: recebe as informações do PostMan e armazena no parâmetro request.
-    public String createAccount(@RequestBody AccountRequest request){
-        System.out.println("entrou no método createAccount");
+    public ResponseEntity<Account> createAccount(@RequestBody AccountRequest request) {
+        log.info("BankController.createAccount - init");
 
-        // passando o parâmetro para bankService
-        bankService.createAccount(request);
-        return "sucess";
+        Account account = bankService.createAccount(request);
+
+        if (Objects.isNull(account))
+            return ResponseEntity.badRequest().body(null);
+
+        log.info("BankController.createAccount - init");
+
+        return ResponseEntity.ok(account);
+
     }
 }

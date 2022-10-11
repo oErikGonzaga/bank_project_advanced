@@ -10,4 +10,5 @@ public class AddressResponse implements Serializable {
     private String cep;
     private String localidade;
     private String logradouro;
+    private boolean erro;
 }

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import request.AccountRequest;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
 
 import static br.com.gonzaga.mybankproject.Utils.DateUtil.stringToLocalDate;
 import static br.com.gonzaga.mybankproject.Utils.NumberUtil.generateRandomNumber;
@@ -33,7 +35,15 @@ public class BankServiceImpl implements BankService {
     public Account createAccount(AccountRequest request) {
         log.info("BankServiceimpl.createAccount init - account={}", request);
 
-        AddressResponse addressResponse = viaCepClient.getAddressByCep(request.getCep());
+        // todo -  o cep informado existe
+        // todo - o cpf ou email ja tem uma conta
+        // todo -  verificar se a senha só tem numeros
+
+        var addressResponse = getAddress(request).orElse(null);
+
+        if (Objects.isNull(addressResponse)) {
+            return null;
+        }
 
         Address address = Address
                 .builder()
@@ -82,5 +92,22 @@ public class BankServiceImpl implements BankService {
         }
 
         return number;
+    }
+
+    private Optional<AddressResponse> getAddress(AccountRequest request){
+
+        try {
+
+            AddressResponse addressResponse = viaCepClient.getAddressByCep(request.getCep());
+
+            if (addressResponse.isErro()){
+                System.out.println("teve erro");
+            }
+
+            return Optional.of(addressResponse);
+
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
