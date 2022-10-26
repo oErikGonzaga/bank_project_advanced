@@ -1,4 +1,4 @@
-package request;
+package br.com.gonzaga.mybankproject.request;
 
 import lombok.Data;
 

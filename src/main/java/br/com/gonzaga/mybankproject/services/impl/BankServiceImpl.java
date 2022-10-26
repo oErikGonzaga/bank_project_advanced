@@ -12,7 +12,7 @@ import br.com.gonzaga.mybankproject.services.BankService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import request.AccountRequest;
+import br.com.gonzaga.mybankproject.request.AccountRequest;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
