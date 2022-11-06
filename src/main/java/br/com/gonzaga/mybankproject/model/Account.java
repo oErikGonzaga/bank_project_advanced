@@ -1,4 +1,4 @@
-package br.com.gonzaga.mybankproject.models;
+package br.com.gonzaga.mybankproject.model;
 
 import lombok.*;
 

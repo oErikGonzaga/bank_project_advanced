@@ -1,9 +1,9 @@
 package br.com.gonzaga.mybankproject.services.impl;
 
 import br.com.gonzaga.mybankproject.client.ViaCepClient;
-import br.com.gonzaga.mybankproject.models.Account;
-import br.com.gonzaga.mybankproject.models.Address;
-import br.com.gonzaga.mybankproject.models.Client;
+import br.com.gonzaga.mybankproject.model.Account;
+import br.com.gonzaga.mybankproject.model.Address;
+import br.com.gonzaga.mybankproject.model.Client;
 import br.com.gonzaga.mybankproject.repository.AccountRepository;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
 import br.com.gonzaga.mybankproject.repository.ClientRepository;
@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
-import static br.com.gonzaga.mybankproject.Utils.DateUtil.stringToLocalDate;
-import static br.com.gonzaga.mybankproject.Utils.NumberUtil.generateRandomNumber;
+import static br.com.gonzaga.mybankproject.util.DateUtil.stringToLocalDate;
+import static br.com.gonzaga.mybankproject.util.NumberUtil.generateRandomNumber;
 
 @Slf4j
 @Service
@@ -100,7 +100,8 @@ public class BankServiceImpl implements BankService {
 
             AddressResponse addressResponse = viaCepClient.getAddressByCep(request.getCep());
 
-            if (addressResponse.isErro()){
+            if (addressResponse.isErro()){          /*  quando dados são booleans, não utilizamos
+                                                        o método 'get', utilizamos 'is' (isErro) */
                 System.out.println("teve erro");
             }
 

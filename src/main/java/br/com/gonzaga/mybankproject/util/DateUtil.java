@@ -1,4 +1,4 @@
-package br.com.gonzaga.mybankproject.Utils;
+package br.com.gonzaga.mybankproject.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

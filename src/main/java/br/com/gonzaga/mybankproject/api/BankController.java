@@ -1,6 +1,6 @@
 package br.com.gonzaga.mybankproject.api;
 
-import br.com.gonzaga.mybankproject.models.Account;
+import br.com.gonzaga.mybankproject.model.Account;
 import br.com.gonzaga.mybankproject.services.BankService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,4 +11,5 @@ public class AddressResponse implements Serializable {
     private String localidade;
     private String logradouro;
     private boolean erro;
+        //  Lembrete: primitivos quando são criados, nascem como 0 ou false.
 }
