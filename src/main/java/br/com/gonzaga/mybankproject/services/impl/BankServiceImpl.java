@@ -1,6 +1,7 @@
 package br.com.gonzaga.mybankproject.services.impl;
 
 import br.com.gonzaga.mybankproject.client.ViaCepClient;
+import br.com.gonzaga.mybankproject.exceptions.AddressNotFoundException;
 import br.com.gonzaga.mybankproject.model.Account;
 import br.com.gonzaga.mybankproject.model.Address;
 import br.com.gonzaga.mybankproject.model.Client;
@@ -39,7 +40,8 @@ public class BankServiceImpl implements BankService {
         // todo - o cpf ou email ja tem uma conta
         // todo -  verificar se a senha só tem numeros
 
-        var addressResponse = getAddress(request).orElse(null);
+        var addressResponse = getAddress(request)
+                .orElseThrow(() -> new AddressNotFoundException(""));   // Lançando nossa Exception
 
         if (Objects.isNull(addressResponse)) {
             return null;

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.gonzaga.mybankproject.request.AccountRequest;
 
+import java.util.List;
 import java.util.Objects;
 
 @Slf4j
@@ -36,4 +37,5 @@ public class BankController {
         return ResponseEntity.ok(account);
 
     }
+
 }
