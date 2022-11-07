@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+// Camada de Modelo (Model), conforme padrão M.V.C.
+
 // Lombok
 @Getter
 @Setter

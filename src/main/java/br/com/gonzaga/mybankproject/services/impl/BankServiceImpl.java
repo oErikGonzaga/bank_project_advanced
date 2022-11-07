@@ -33,6 +33,9 @@ public class BankServiceImpl implements BankService {
     private final AddressRepository addressRepository;
     private final AccountRepository accountRepository;
 
+
+    // Camada de Visualização (View) conforme padrão M.V.C.
+
     @Override
     public Account createAccount(AccountRequest request) {
         log.info("BankServiceimpl.createAccount init - account={}", request);

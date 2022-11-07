@@ -9,8 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.gonzaga.mybankproject.request.AccountRequest;
 
-import java.util.List;
 import java.util.Objects;
+
+// Camada de Controle (Controller), conforme padrão M.V.C.
 
 @Slf4j
 @RestController
