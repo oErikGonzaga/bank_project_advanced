@@ -1,6 +1,7 @@
 package br.com.gonzaga.mybankproject.services.impl;
 
 import br.com.gonzaga.mybankproject.client.ViaCepClient;
+import br.com.gonzaga.mybankproject.exceptions.AccountAlreadyExistException;
 import br.com.gonzaga.mybankproject.exceptions.AddressNotFoundException;
 import br.com.gonzaga.mybankproject.model.Account;
 import br.com.gonzaga.mybankproject.model.Address;
@@ -41,11 +42,14 @@ public class BankServiceImpl implements BankService {
         // todo -  verificar se a senha só tem numeros
 
         var addressResponse = getAddress(request)
-                .orElseThrow(() -> new AddressNotFoundException(""));   // Lançando nossa Exception
+                .orElseThrow(() -> new AddressNotFoundException("Address Not Found"));   // Lançando nossa Exception
 
-        if (Objects.isNull(addressResponse)) {
-            return null;
-        }
+        accountRepository
+                .findFirstByClientDocumentOrClientEmail(request.getDocument(), request.getEmail())
+                .ifPresent(account -> {
+                    String baseErrorMessage = "A conta já existe para CPF e Email informado. Numero da Conta: ";
+                    throw new AccountAlreadyExistException(baseErrorMessage + account.getNumber());
+                });
 
         Address address = Address
                 .builder()
@@ -80,9 +84,7 @@ public class BankServiceImpl implements BankService {
                 .build();
 
         Account savedAccount = accountRepository.save(account);
-
         log.info("BankServiceimpl.createAccount end - account={}", savedAccount);
-
         return account;
     }
 
@@ -92,21 +94,18 @@ public class BankServiceImpl implements BankService {
         while (accountRepository.findFirstByNumber(number).isPresent()) {
             number = generateRandomNumber();
         }
-
         return number;
     }
 
     private Optional<AddressResponse> getAddress(AccountRequest request){
 
         try {
-
             AddressResponse addressResponse = viaCepClient.getAddressByCep(request.getCep());
 
             if (addressResponse.isErro()){          /*  quando dados são booleans, não utilizamos
                                                         o método 'get', utilizamos 'is' (isErro) */
                 System.out.println("teve erro");
             }
-
             return Optional.of(addressResponse);
 
         } catch (Exception e) {
