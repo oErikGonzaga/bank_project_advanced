@@ -28,8 +28,8 @@ public class AppUtil {
 
             for (; i < 9; i++) {
                 num = (value.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
+                sm += (num * peso);
+                peso -= 1;
             }
 
             int r = 11 - (sm % 11);
@@ -40,8 +40,8 @@ public class AppUtil {
 
             for (i = 0; i < 10; i++) {
                 num = (value.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
+                sm += (num * peso);
+                peso -= 1;
             }
 
             r = 11 - (sm % 11);
