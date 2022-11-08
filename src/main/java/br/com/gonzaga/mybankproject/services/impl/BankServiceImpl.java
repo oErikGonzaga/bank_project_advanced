@@ -2,6 +2,7 @@ package br.com.gonzaga.mybankproject.services.impl;
 
 import br.com.gonzaga.mybankproject.client.ViaCepClient;
 import br.com.gonzaga.mybankproject.exceptions.AccountAlreadyExistException;
+import br.com.gonzaga.mybankproject.exceptions.AccountValidationException;
 import br.com.gonzaga.mybankproject.exceptions.AddressNotFoundException;
 import br.com.gonzaga.mybankproject.model.Account;
 import br.com.gonzaga.mybankproject.model.Address;
@@ -11,6 +12,7 @@ import br.com.gonzaga.mybankproject.repository.AddressRepository;
 import br.com.gonzaga.mybankproject.repository.ClientRepository;
 import br.com.gonzaga.mybankproject.response.AddressResponse;
 import br.com.gonzaga.mybankproject.services.BankService;
+import br.com.gonzaga.mybankproject.util.AppUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,15 +43,18 @@ public class BankServiceImpl implements BankService {
         // todo - o cpf ou email ja tem uma conta
         // todo -  verificar se a senha só tem numeros
 
-        var addressResponse = getAddress(request)
-                .orElseThrow(() -> new AddressNotFoundException("Address Not Found"));   // Lançando nossa Exception
-
         accountRepository
                 .findFirstByClientDocumentOrClientEmail(request.getDocument(), request.getEmail())
                 .ifPresent(account -> {
                     String baseErrorMessage = "A conta já existe para CPF e Email informado. Numero da Conta: ";
                     throw new AccountAlreadyExistException(baseErrorMessage + account.getNumber());
                 });
+
+        AddressResponse addressResponse = getAddress(request)
+                .orElseThrow(() -> new AddressNotFoundException("Address Not Found"));   // Lançando nossa Exception
+
+        if (!AppUtil.isCpfValid(request.getDocument()))
+            throw new AccountValidationException("CPF Inválido");
 
         Address address = Address
                 .builder()
