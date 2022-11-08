@@ -18,7 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import br.com.gonzaga.mybankproject.request.AccountRequest;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static br.com.gonzaga.mybankproject.util.DateUtil.stringToLocalDate;
@@ -91,6 +94,29 @@ public class BankServiceImpl implements BankService {
         Account savedAccount = accountRepository.save(account);
         log.info("BankServiceimpl.createAccount end - account={}", savedAccount);
         return account;
+    }
+    @Override
+    public void deposit(Long accountNumber, BigDecimal value) {
+
+        // buscar a conta no banco
+        Account account = accountRepository
+                .findFirstByNumber(accountNumber)
+                .orElseThrow(() -> new AccountValidationException("Conta não localizada"));
+
+        // verificar se a está ativa
+        if (Objects.isNull(account.getDeactivation()))
+            throw new AccountValidationException("Conta inativa");
+
+        // adicionando valor
+        BigDecimal total = account.getBalance().add(value);
+        account.setBalance(total);
+
+        // salvar a alteração
+        accountRepository.save(account);
+    }
+    @Override
+    public List<Account> listAll() {
+        return null;
     }
 
     private Long generateAccountNumber() {
