@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import br.com.gonzaga.mybankproject.request.AccountRequest;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 import static br.com.gonzaga.mybankproject.util.DateUtil.stringToLocalDate;
@@ -33,8 +32,6 @@ public class BankServiceImpl implements BankService {
     private final AddressRepository addressRepository;
     private final AccountRepository accountRepository;
 
-
-    // Camada de Visualização (View) conforme padrão M.V.C.
 
     @Override
     public Account createAccount(AccountRequest request) {
