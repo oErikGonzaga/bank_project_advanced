@@ -1,6 +1,6 @@
 package br.com.gonzaga.mybankproject.client;
 
-import br.com.gonzaga.mybankproject.response.AddressResponse;
+import br.com.gonzaga.mybankproject.repository.response.AddressResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

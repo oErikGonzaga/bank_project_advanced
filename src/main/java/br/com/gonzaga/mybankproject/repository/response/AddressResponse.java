@@ -1,4 +1,4 @@
-package br.com.gonzaga.mybankproject.response;
+package br.com.gonzaga.mybankproject.repository.response;
 
 import lombok.Data;
 import java.io.Serializable;

@@ -10,7 +10,7 @@ import br.com.gonzaga.mybankproject.model.Client;
 import br.com.gonzaga.mybankproject.repository.AccountRepository;
 import br.com.gonzaga.mybankproject.repository.AddressRepository;
 import br.com.gonzaga.mybankproject.repository.ClientRepository;
-import br.com.gonzaga.mybankproject.response.AddressResponse;
+import br.com.gonzaga.mybankproject.repository.response.AddressResponse;
 import br.com.gonzaga.mybankproject.services.BankService;
 import br.com.gonzaga.mybankproject.util.AppUtil;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,6 @@ import br.com.gonzaga.mybankproject.request.AccountRequest;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -115,10 +114,24 @@ public class BankServiceImpl implements BankService {
         accountRepository.save(account);
     }
     @Override
-    public List<Account> listAll() {
-        return null;
-    }
+    public void withdraw(Long accountNumber, BigDecimal value) {
 
+        // buscar a conta no banco
+        Account account = accountRepository
+                .findFirstByNumber(accountNumber)
+                .orElseThrow(() -> new AccountValidationException("Conta não localizada"));
+
+        // verificar se a está ativa
+        if (Objects.isNull(account.getDeactivation()))
+            throw new AccountValidationException("Conta inativa");
+
+        // adicionando valor
+        BigDecimal total = account.getBalance().add(value);
+        account.setBalance(total);
+
+        // salvar a alteração
+        accountRepository.save(account);
+    }
     private Long generateAccountNumber() {
         Long number = generateRandomNumber();
 

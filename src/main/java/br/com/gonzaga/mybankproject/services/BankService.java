@@ -10,6 +10,5 @@ public interface BankService {
 
     Account createAccount(AccountRequest accountRequest);
     void deposit (Long accountNumber, BigDecimal value);
-    List<Account> listAll();
-
+    void withdraw (Long accounNumber, BigDecimal value);
 }
