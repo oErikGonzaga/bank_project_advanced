@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.gonzaga.mybankproject.request.AccountRequest;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 // Camada de Controle (Controller), conforme padrão M.V.C.
@@ -33,10 +34,20 @@ public class BankController {
         if (Objects.isNull(account))
             return ResponseEntity.badRequest().body(null);
 
-        log.info("BankController.createAccount - init");
-
+        log.info("BankController.createAccount - end");
         return ResponseEntity.ok(account);
+    }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("api/deposit/{accountNumber}")
+    public void deposit (@RequestParam("value") BigDecimal value,
+                         @PathVariable("accountNumber") Long number){
+
+        log.info("BankController.deposit init");
+
+        bankService.deposit(number, value);
+
+        log.info("BankController.deposit end");
     }
 
 }

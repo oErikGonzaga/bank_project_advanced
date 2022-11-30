@@ -5,6 +5,11 @@ CREATE DATABASE bank_project_db;
 DESC bank_project_db;
 
 SELECT * FROM bank_project_db.client;
+SELECT * FROM bank_project_db.account;
+SELECT * FROM bank_project_db.address;
+SELECT * FROM bank_project_db.access;
+SELECT * FROM bank_project_db.transactions;
+
 
 SHOW bank_project_db.client;
 

@@ -25,6 +25,7 @@ import java.util.Optional;
 
 import static br.com.gonzaga.mybankproject.util.DateUtil.stringToLocalDate;
 import static br.com.gonzaga.mybankproject.util.NumberUtil.generateRandomNumber;
+import static java.util.Objects.nonNull;
 
 @Slf4j
 @Service
@@ -122,11 +123,13 @@ public class BankServiceImpl implements BankService {
                 .orElseThrow(() -> new AccountValidationException("Conta não localizada"));
 
         // verificar se a está ativa
-        if (Objects.isNull(account.getDeactivation()))
+        if (Objects.nonNull(account.getDeactivation()))
             throw new AccountValidationException("Conta inativa");
 
         // adicionando valor
-        BigDecimal total = account.getBalance().add(value);
+        BigDecimal current = nonNull(account.getBalance()) ? account.getBalance() : new BigDecimal(0);
+
+        BigDecimal total = current.add(value);
         account.setBalance(total);
 
         // salvar a alteração
